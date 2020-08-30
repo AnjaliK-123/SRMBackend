@@ -16,7 +16,7 @@ using System.Data.SqlClient;
 using ServiceRequestManagement.RequestFormatter;
 using UserRegistration2.RequestFormatter;
 using UserRegistration2.Services.Implementations;
-//using MimeKit;
+
 
 namespace UserRegistration2.Controllers
 {
@@ -37,14 +37,7 @@ namespace UserRegistration2.Controllers
             _service = service;
         }
 
-        // GET: api/Requests
-    //    [HttpGet]
-      /*  public ActionResult<IEnumerable<Request>> GetRequest()
-        {
-          
-            var requestItems = _repository.GetRequest();
-            return Ok(requestItems);
-        }*/
+   
         
         
         [HttpGet]
@@ -66,39 +59,7 @@ namespace UserRegistration2.Controllers
             return Ok(objList);
         }
 
-        // GET: api/Requests/5
-        [HttpGet("{id}")]
-        public ActionResult<Request> GetRequestById(int Id)
-        {
-           
-            var requestItem = _repository.GetRequestById(Id);
-
-
-            if (requestItem != null)
-            {
-
-                return Ok(requestItem);
-            }
-            return NotFound();
-        }
-
-        // PUT: api/Requests/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        /*    [HttpPut("{id}")]
-            public ActionResult UpdateRequest(int Id, RequestUpdateDto updateRequest)
-            {
-
-                var updateRequestFromRepo = _repository.GetRequestById(Id);
-                if (updateRequestFromRepo == null)
-                {
-                    return NotFound();
-                }
-                _mapper.Map(updateRequest, updateRequestFromRepo);
-                _repository.UpdateRequest(updateRequestFromRepo);
-                _repository.SaveChanges();
-                return NoContent();
-            }*/
+      
 
 
         // POST: api/Requests
@@ -113,21 +74,7 @@ namespace UserRegistration2.Controllers
             return createRequest;
         }
 
-        // DELETE: api/Requests/5
-       [HttpDelete("{id}")]
-        public ActionResult<Request> DeleteRequest(int Id)
-        {
-            SRMContext context = new SRMContext();
-            var requestFromRepo = _repository.GetRequestById(Id);
-            if (requestFromRepo == null)
-            {
-                return NotFound();
-            }
-            _repository.DeleteRequest(requestFromRepo);
-            context.SaveChanges();
-            return NoContent();
-
-        }
+      
 
 
     }

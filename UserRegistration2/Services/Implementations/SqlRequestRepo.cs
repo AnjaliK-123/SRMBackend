@@ -13,12 +13,9 @@ namespace UserRegistration2.Services.Implementations
 {
     public class SqlRequestRepo : IRequestRepo
     {
-      //  private readonly SRMContext _context;
+    
         private readonly IEmailSender emailSender;
-        //public SqlRequestRepo(SRMContext context)
-        //{
-        //    _context = context;
-        //}
+      
 
 
         public SqlRequestRepo(IEmailSender emailSender)
@@ -39,10 +36,6 @@ namespace UserRegistration2.Services.Implementations
 
             var email1 = context.Employees.FirstOrDefault(e => e.Id == request.CreatedEmpId).EmailId;
            var AdminEmail = context.Employees.FirstOrDefault(e => e.DepartmentId == request.DepartmentId && e.RoleId == (context.Roles.FirstOrDefault(r => r.Role1.Equals("Admin")).Id)).EmailId;
-            //var fromAddress = new MailAddress("anjalikhadake888@gmail.com", "My Name");
-            //var toAddress1 = new MailAddress((email1).ToString());
-            //var toAddress2 = new MailAddress((AdminEmail).ToString());
-            //const string fromPassword = "password";
             string sub = "Service Request";
             string content = "Request Created!" +
                             "\nRequest Id: " + request.Id +
@@ -61,35 +54,11 @@ namespace UserRegistration2.Services.Implementations
             emailSender.SendEmail(message);
            
         }
-        //catch (Exception ex)
-        //{
-        //    Console.Error.WriteLine(ex.ToString());
-        //}
+       
 
 
 
-        public void DeleteRequest(Request request)
-        {
-            var context = new SRMContext();
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-            context.Request.Remove(request);
-
-        }
-
-        //public IEnumerable<Request> GetRequest()
-        // {
-
-        //     return _context.Request
-        //     .Include(stat => stat.Status)
-        //     .Include(dept => dept.Department)
-        //     .Include(cat => cat.Category)
-        //     .Include(cat => cat.SubCategory)
-        //     .ToList();
-
-        // }
+       
         public List<Request> GetRequests()
         {
 
@@ -97,29 +66,7 @@ namespace UserRegistration2.Services.Implementations
         return context.Request.ToList();
         }
 
-        public Request GetRequestById(int Id)
-        {
-            var context = new SRMContext();
-            var request = context.Request
-           .Include(stat => stat.Status)
-            .Include(dept => dept.Department)
-          .Include(cat => cat.Category)
-                                    .Where(req => req.Id == Id).FirstOrDefault();
-           
-            return request;
-        }
-
-        //public bool SaveChanges()
-        //{
-            
-        //    return (_context.SaveChanges() >= 0);
-        //}
-
-        public void UpdateRequest(Request request)
-        {
-            
-        }
-
+      
        
     }
 }
