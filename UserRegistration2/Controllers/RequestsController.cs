@@ -27,13 +27,12 @@ namespace UserRegistration2.Controllers
        
         private readonly IRequestRepo _repository;
         private readonly object requestItems;
-        private readonly IRequestService _service;
+      
         
-        public RequestsController(IRequestRepo repository,  IRequestService service)
+        public RequestsController(IRequestRepo repository)
         {
             _repository = repository;
-            _service = service;
-     
+            
         }
 
    
