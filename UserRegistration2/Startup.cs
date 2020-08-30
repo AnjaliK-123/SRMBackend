@@ -48,7 +48,7 @@ namespace UserRegistration2
             services.AddScoped<ICategoryRepo, SqlCategoryRepo>();
             services.AddScoped<IDepartmentRepo, SqlDepartmentRepo>();
             services.AddScoped<IRequestRepo, SqlRequestRepo>();
-            services.AddScoped<IStatusRepo, SqlStatusRepo>();
+            
 
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddTransient<IRequestService, RequestService>();

@@ -17,12 +17,12 @@ namespace UserRegistration2.Controllers
     {
         private readonly IDepartmentRepo _repository;
         private readonly object departmentItems;
-        private readonly IMapper _mapper;
+       
 
-        public DepartmentsController(IDepartmentRepo repository, IMapper mapper)
+        public DepartmentsController(IDepartmentRepo repository)
         {
             _repository = repository;
-            _mapper = mapper;
+         
         }
 
         // GET: api/Departments

@@ -19,13 +19,12 @@ namespace UserRegistration2.Controllers
     {
         private readonly ICategoryRepo _repository;
         private readonly object categoryItems;
-        private readonly IMapper _mapper;
+       
 
-        public CategoriesController(ICategoryRepo repository, IMapper mapper)
+        public CategoriesController(ICategoryRepo repository)
         {
             _repository = repository;
-            _mapper = mapper;
-
+          
         }
 
         // GET: api/Categories
