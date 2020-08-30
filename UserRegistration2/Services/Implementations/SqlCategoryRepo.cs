@@ -16,27 +16,6 @@ namespace UserRegistration2.Services.Implementations
             _context = context;
         }
 
-        public void CreateCategory(Category category)
-        {
-           if(category== null)
-            {
-                throw new ArgumentNullException(nameof(category));
-            }
-            _context.Category.Add(category);
-        }
-
-       
-
-        public void DeleteCategory(Category category)
-        {
-            if (category == null)
-            {
-                throw new ArgumentNullException(nameof(category));
-            }
-            _context.Category.Remove(category);
-        }
-
-       
 
         public IEnumerable<Category> GetCategory()
         {
@@ -44,28 +23,6 @@ namespace UserRegistration2.Services.Implementations
         }
 
        
-
-        public Category GetCategoryById(int Id)
-        {
-            
-             var category = _context.Category.Include(cat => cat.Department).Where(cat => cat.Id == Id).FirstOrDefault();
-            
-                                            
-            return category;
-        }
-
-        
-
-        public bool SaveChanges()
-        {
-            return (_context.SaveChanges() >= 0);
-        }
-
-        public void UpdateCategory(Category category)
-        {
-            
-        }
-
        
     }
 }
