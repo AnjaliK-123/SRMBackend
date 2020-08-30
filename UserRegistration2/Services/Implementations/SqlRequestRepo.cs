@@ -15,34 +15,35 @@ namespace UserRegistration2.Services.Implementations
     {
     
         private readonly IEmailSender emailSender;
-      
+        private readonly SRMContext _context;
 
 
-        public SqlRequestRepo(IEmailSender emailSender)
+        public SqlRequestRepo(IEmailSender emailSender, SRMContext context)
         {
             this.emailSender = emailSender;
+            _context = context;
         }
 
         public void CreateRequest(Request request)
         {
-            var context = new SRMContext();
+           
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
-           context.Request.Add(request);
-           context.SaveChanges();
+           _context.Request.Add(request);
+           _context.SaveChanges();
 
 
-            var email1 = context.Employees.FirstOrDefault(e => e.Id == request.CreatedEmpId).EmailId;
-           var AdminEmail = context.Employees.FirstOrDefault(e => e.DepartmentId == request.DepartmentId && e.RoleId == (context.Roles.FirstOrDefault(r => r.Role1.Equals("Admin")).Id)).EmailId;
+            var email1 = _context.Employees.FirstOrDefault(e => e.Id == request.CreatedEmpId).EmailId;
+           var AdminEmail = _context.Employees.FirstOrDefault(e => e.DepartmentId == request.DepartmentId && e.RoleId == (_context.Roles.FirstOrDefault(r => r.Role1.Equals("Admin")).Id)).EmailId;
             string sub = "Service Request";
             string content = "Request Created!" +
                             "\nRequest Id: " + request.Id +
-                                "\nRequest Created by: " + context.Employees.FirstOrDefault(e => e.Id == request.CreatedEmpId).FirstName +
-                                "\nDepartment: " + context.Department.FirstOrDefault(d => d.Id == request.DepartmentId).Name +
-                                 "\nCategory: " + context.Category.FirstOrDefault(c => c.Id == request.CategoryId).Name +
-                                  "\nSubcategory: " + context.Category.FirstOrDefault(s => s.Id == request.SubCategoryId).Name +
+                                "\nRequest Created by: " + _context.Employees.FirstOrDefault(e => e.Id == request.CreatedEmpId).FirstName +
+                                "\nDepartment: " + _context.Department.FirstOrDefault(d => d.Id == request.DepartmentId).Name +
+                                 "\nCategory: " + _context.Category.FirstOrDefault(c => c.Id == request.CategoryId).Name +
+                                  "\nSubcategory: " + _context.Category.FirstOrDefault(s => s.Id == request.SubCategoryId).Name +
                                   "\nTitle :" + request.Title +
                                   "\nSummary :" + request.Summary;
 
@@ -54,17 +55,23 @@ namespace UserRegistration2.Services.Implementations
             emailSender.SendEmail(message);
            
         }
-       
 
 
+        public bool SaveChanges()
+        {
 
-       
+            return (_context.SaveChanges() >= 0);
+        }
+
+
         public List<Request> GetRequests()
         {
 
-            var context = new SRMContext();
-        return context.Request.ToList();
+        return _context.Request.ToList();
+
         }
+       
+
 
       
        

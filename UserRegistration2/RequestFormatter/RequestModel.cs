@@ -8,6 +8,12 @@ namespace UserRegistration2.RequestFormatter
 {
     public class RequestModel
     {
+        private readonly SRMContext _context;
+
+        public RequestModel(SRMContext context)
+        {
+            _context = context;
+        }
         public string RequestId { get; set; }
         public string Title { get; set; }
 
@@ -35,29 +41,29 @@ namespace UserRegistration2.RequestFormatter
 
         public void CopyData(Request request)
         {
-            SRMContext context = new SRMContext();
+          
 
 
             this.RequestId = request.Id.ToString();
             this.Title = request.Title;
-            this.RequestStatus = context.Status.FirstOrDefault(n => n.Id == request.StatusId).Status1;
-            this.RequestType = context.RequestTypes.FirstOrDefault(n => n.Id == request.RequestTypeId).RequestType1;
-            this.RequestDepartment = context.Department.FirstOrDefault(n => n.Id == request.DepartmentId).Name;
-            this.RequestCategory = context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Name;
-            this.RequestSubCategory = context.Category.FirstOrDefault(n => n.Id == request.SubCategoryId).Name;
-            this.RequestStatusId = context.Status.FirstOrDefault(n => n.Id == request.StatusId).Id;
-            this.RequestTypeId = context.RequestTypes.FirstOrDefault(n => n.Id == request.RequestTypeId).Id;
-            this.RequestDepartmentId = context.Department.FirstOrDefault(n => n.Id == request.DepartmentId).Id;
-            this.RequestCategoryId = context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Id;
-            this.RequestSubCategoryId = context.Category.FirstOrDefault(n => n.Id == request.SubCategoryId).Id;
+            this.RequestStatus = _context.Status.FirstOrDefault(n => n.Id == request.StatusId).Status1;
+            this.RequestType = _context.RequestTypes.FirstOrDefault(n => n.Id == request.RequestTypeId).RequestType1;
+            this.RequestDepartment = _context.Department.FirstOrDefault(n => n.Id == request.DepartmentId).Name;
+            this.RequestCategory = _context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Name;
+            this.RequestSubCategory = _context.Category.FirstOrDefault(n => n.Id == request.SubCategoryId).Name;
+            this.RequestStatusId = _context.Status.FirstOrDefault(n => n.Id == request.StatusId).Id;
+            this.RequestTypeId = _context.RequestTypes.FirstOrDefault(n => n.Id == request.RequestTypeId).Id;
+            this.RequestDepartmentId = _context.Department.FirstOrDefault(n => n.Id == request.DepartmentId).Id;
+            this.RequestCategoryId = _context.Category.FirstOrDefault(n => n.Id == request.CategoryId).Id;
+            this.RequestSubCategoryId = _context.Category.FirstOrDefault(n => n.Id == request.SubCategoryId).Id;
             this.RequestSummary = request.Summary;
             this.Title = request.Title;
             this.CreatedOn = request.CreatedOn;
             this.LastModifiedOn = request.LastModifiedOn;
-            // this.CreatedEmpId = request.CreatedEmpId;
-            this.CreatedEmpId = context.Employees.FirstOrDefault(n => n.Id == request.CreatedEmpId).Id;
+            this.CreatedEmpId = _context.Employees.FirstOrDefault(n => n.Id == request.CreatedEmpId).Id;
            this.AssignedEmpId = request.AssignedEmpId;
             this.LastModifiedBy = request.LastModifiedBy;
+            
 
         }
 

@@ -24,20 +24,18 @@ namespace UserRegistration2.Controllers
     [ApiController]
     public class RequestsController : ControllerBase
     {
-       
+        private readonly SRMContext _context;
         private readonly IRequestRepo _repository;
-        private readonly object requestItems;
       
         
-        public RequestsController(IRequestRepo repository)
+        public RequestsController(IRequestRepo repository, SRMContext context)
         {
             _repository = repository;
-            
+            _context = context;
         }
 
    
-        
-        
+        //GET : api/ Requests
         [HttpGet]
         public ActionResult GetRequests()
         {
@@ -48,7 +46,7 @@ namespace UserRegistration2.Controllers
             foreach (var request in allRequest)
             {
 
-                RequestModel obj = new RequestModel();
+                RequestModel obj = new RequestModel(_context);
                 obj.CopyData(request);
 
                 objList.Add(obj);
@@ -61,14 +59,14 @@ namespace UserRegistration2.Controllers
 
 
         // POST: api/Requests
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+       
         [HttpPost]
         public ActionResult<Request> CreateRequest(Request createRequest)
         {
-            SRMContext context = new SRMContext();
+          
             _repository.CreateRequest(createRequest);
-            context.SaveChanges();
+            _repository.SaveChanges();
+           
             return createRequest;
         }
 
