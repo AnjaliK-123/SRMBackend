@@ -33,68 +33,7 @@ namespace UserRegistration2.Controllers
             return Ok(departmentItems);
         }
 
-        // GET: api/Departments/5
-        [HttpGet("{id}")]
-        public ActionResult<Department> GetDepartmentById(int Id)
-        {
-            var departmentItem = _repository.GetDepartmentById(Id);
-
-
-            if (departmentItem != null)
-            {
-
-                return Ok(departmentItem);
-            }
-            return NotFound();
-
-        }
-
-        // PUT: api/Departments/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-     /*   [HttpPut("{id}")]
-        public ActionResult UpdateDepartment(int Id, DepartmentUpdateDto updateDepartment)
-        {
-           
-
-            var updateDepartmentFromRepo = _repository.GetDepartmentById(Id);
-            if (updateDepartmentFromRepo == null)
-            {
-                return NotFound();
-            }
-            _mapper.Map(updateDepartment, updateDepartmentFromRepo);
-            _repository.UpdateDepartment(updateDepartmentFromRepo);
-            _repository.SaveChanges();
-            return NoContent();
-        }*/
-
-        // POST: api/Departments
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
-        public ActionResult<Department> CreateDepartment(Department createDepartment)
-        {
-          
-            _repository.CreateDepartment(createDepartment);
-            _repository.SaveChanges();
-            return createDepartment;
-        }
-
-        // DELETE: api/Departments/5
-        [HttpDelete("{id}")]
-        public ActionResult<Department> DeleteDepartment(int Id)
-        {
-            
-            var departmentFromRepo = _repository.GetDepartmentById(Id);
-            if (departmentFromRepo == null)
-            {
-                return NotFound();
-            }
-            _repository.DeleteDepartment(departmentFromRepo);
-            _repository.SaveChanges();
-            return NoContent();
-        }
-
+       
      
     }
 }

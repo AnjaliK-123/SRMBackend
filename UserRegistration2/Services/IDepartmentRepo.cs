@@ -8,14 +8,9 @@ namespace UserRegistration2.Services
 {
    public interface IDepartmentRepo
     {
-        bool SaveChanges();
+      
         IEnumerable<Department> GetDepartment();
-        Department GetDepartmentById(int Id);
 
-        void CreateDepartment(Department department);
-
-        void UpdateDepartment(Department department);
-
-        void DeleteDepartment(Department department);
+       
     }
 }
